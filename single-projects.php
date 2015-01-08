@@ -13,21 +13,6 @@ get_header(); ?>
 		<div id="content" role="main" >
 
 
-<div class="breadcrumbs">
-
-		</div>
-		      <div class="col-md-12">
-                                  <ol class="breadcrumb" id="site-breadcrumbs">
-
-                                  <li><a href="/">Projects</a></li>
-                                  <li class="active"><?php echo the_title(); ?></li>
-                                  </ol>
-                                  </div>
-
-
-<div class="cf"></div><br/>
-
-
 
                             <div class="name" style="font-weight:bolder; font-size: 1.3em" align="center">
                                 <a href="<?php echo get_post_meta( get_the_ID(), 'project_info_project_url', true ) ?>" target="_blank" style="font-size: 1.7em; font-weight: lighter; color: #4FBA6F"><?php echo the_title() ?>

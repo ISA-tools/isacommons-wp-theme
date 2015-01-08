@@ -30,13 +30,13 @@
             <ul>
                 <li><a href="http://www.isa-tools.org" target="_blank">ISA tools</a></li>
                 <li><a href="http://www.biosharing.org" target="_blank">BioSharing</a></li>
+                <li><a href="http://www.oerc.ox.ac.uk" target="_blank">Oxford e-Research Centre</a></li>
             </ul>
         </div>
 
         <div class="col col_med">
             <h3>Resources</h3>
             <ul>
-                <li><a href="http://www.github.com/ISA-tools" target="_blank">Code</a></li>
                 <li><a href="mailto:isatools@googlegroups.com">Contact us</a></li>
                 <li><?php wp_loginout(); ?></li>
                 <li><?php wp_register('',''); ?></li>
