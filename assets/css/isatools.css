@@ -39,19 +39,22 @@ a {
 .splitter ul li span {
     margin: 0;
     display: inline-block;
+    width: 100%;
 
 }
 
 .splitter ul li {
-
+    text-align: center;
     border-bottom-color: #ccc;
     cursor: pointer;
     opacity: 0.45;
+    width: 20%;
+    background-color: #f6f7f6;
 }
 
 
 .splitter ul li span {
-    padding: 5px 8px 6px;
+
     color: #666;
     text-decoration: none;
 }
@@ -59,6 +62,7 @@ a {
 .splitter ul li.selected {
     opacity: 1;
     border-bottom: 1px solid #2980BA;
+    background-color: white;
 }
 
 .service-grid {
@@ -2094,7 +2098,7 @@ div.css-search div.em-search-main .em-search-submit:hover {
 }
 
 .site-header {
-    height: 250px;
+    height: 260px;
     background: #2980BA url('../img/map-bg.svg') 50% 2% no-repeat;
     background-size: 100%;
     border-bottom: 7px solid #3B97D3;
@@ -2129,7 +2133,7 @@ div.css-search div.em-search-main .em-search-submit:hover {
     font-weight: lighter;
     margin: 0 auto;
     text-shadow: 1px 1px 3px rgba(41, 128, 186, 1);
-    margin-top: 9em;
+    margin-top: 2em;
     text-rendering: optimizeLegibility;
 }
 
@@ -2146,7 +2150,7 @@ div.css-search div.em-search-main .em-search-submit:hover {
     width: 150px;
     padding-left: 60px;
     margin: 0 auto;
-    margin-top: 60px;
+    margin-top: 2em;
     cursor: pointer;
 }
 

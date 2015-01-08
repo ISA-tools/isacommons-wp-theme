@@ -52,6 +52,14 @@
 		</div>
 	</a>
 
+
+	<div class="commons-description">
+		The <strong>ISA Commons</strong> is a growing community that uses the ISA metadata tracking framework to facilitate
+		<strong>standards-compliant collection, curation, management</strong>, and <strong>reuse</strong> of datasets in an increasingly diverse set of
+		life science domains.
+	</div>
+
+
 </header>
 <div class="tweet-container">
 	<div id="twitter_icon" class="pull-left" style="padding-top: 5px; font-size: 1.5em">
