@@ -47,8 +47,8 @@
 	</div>
 
 	<div class="commons-description">
-		The ISA Commons is a growing community that uses the ISA metadata tracking framework to facilitate
-		standards-compliant collection, curation, management, and reuse of datasets in an increasingly diverse set of
+		The <strong>ISA Commons</strong> is a growing community that uses the ISA metadata tracking framework to facilitate
+		<strong>standards-compliant collection, curation, management</strong>, and <strong>reuse</strong> of datasets in an increasingly diverse set of
 		life science domains.
 	</div>
 
