@@ -103,24 +103,17 @@ a {
 .project-link {
     font-size: .8em;
     text-decoration: none;
-
     font-weight: lighter;
     margin-right: 5px;
     display: inline-block;
-
 }
 
 .description {
     margin-top: 30px;
     padding: 10px;
-
-}
-
-.description h4{
-    font-size: 1.5em;
-    font-weight: bolder;
-    color: #2980BA;margin-bottom: 20px;
-
+    font-size: 1em;
+    font-weight: normal;
+    line-height: 1.3em;
 }
 
 .institute {
@@ -2098,7 +2091,7 @@ div.css-search div.em-search-main .em-search-submit:hover {
 }
 
 .site-header {
-    height: 260px;
+    height: 290px;
     background: #2980BA url('../img/map-bg.svg') 50% 2% no-repeat;
     background-size: 100%;
     border-bottom: 7px solid #3B97D3;
@@ -2132,7 +2125,7 @@ div.css-search div.em-search-main .em-search-submit:hover {
     color: white;
     font-weight: lighter;
     margin: 0 auto;
-    text-shadow: 1px 1px 3px rgba(41, 128, 186, 1);
+    text-shadow: 4px 4px 3px rgba(41, 128, 186, 1);
     margin-top: 2em;
     text-rendering: optimizeLegibility;
 }
@@ -2189,7 +2182,7 @@ div.css-search div.em-search-main .em-search-submit:hover {
 
     .commons-description {
         width: 80%;
-        font-size: 1.2em;
+        font-size: 1.3em;
     }
 
     #footer .col_med {
@@ -2269,7 +2262,7 @@ div.css-search div.em-search-main .em-search-submit:hover {
 
     .commons-description {
         width: 80%;
-        font-size: 1.2em;
+        font-size: 1.3em;
     }
 
     .features {
@@ -2385,7 +2378,7 @@ div.css-search div.em-search-main .em-search-submit:hover {
 
     .commons-description {
         width: 80%;
-        font-size: 1.2em;
+        font-size: 1.3em;
         text-shadow: #cccccc;
     }
 

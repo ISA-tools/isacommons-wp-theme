@@ -679,7 +679,7 @@ function projects_function( $attrs ) {
 
 
 			$str .= '<div class="clearfix"></div>';
-			$str .= '<div class="institute"><a href="' . get_post_meta( get_the_ID(), 'project_info_institution_url', true ) . '" target="_blank"><img src="' . get_post_meta( get_the_ID(), 'project_info_logo', true ) . '" alt="' . get_the_title() . '" class="tool-logo"/> ' . get_post_meta( get_the_ID(), 'project_info_institution', true ) . ', ' . get_post_meta( get_the_ID(), 'project_info_country', true ) . '</a></div>';
+			$str .= '<div class="institute"><a href="' . get_post_meta( get_the_ID(), 'project_info_institution_url', true ) . '" target="_blank">' . get_post_meta( get_the_ID(), 'project_info_institution', true ) . ', ' . get_post_meta( get_the_ID(), 'project_info_country', true ) . '</a></div>';
 
 			$str .= '<div class="tags" >';
 			$tags = preg_split( "/[;,]+/", get_post_meta( get_the_ID(), 'project_info_dataset_types', true ) );

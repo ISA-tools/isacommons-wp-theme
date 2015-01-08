@@ -46,11 +46,6 @@
 		<a href="http://isa-tools.org/publications" class="head-link pull-right" alt="Publications"> <span class="fa fa-book"></span> </a>
 	</div>
 
-	<a href="mailto:isatools@googlegroups.com?subject=Join the commons">
-		<div class="commons-join">
-			Join the commons!
-		</div>
-	</a>
 
 
 	<div class="commons-description">
@@ -58,6 +53,13 @@
 		<strong>standards-compliant collection, curation, management</strong>, and <strong>reuse</strong> of datasets in an increasingly diverse set of
 		life science domains.
 	</div>
+
+	<a href="mailto:isatools@googlegroups.com?subject=Join the commons">
+		<div class="commons-join">
+			Join the commons!
+		</div>
+	</a>
+
 
 
 </header>

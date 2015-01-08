@@ -26,13 +26,30 @@ get_header(); ?>
 
 
 <div class="cf"></div><br/>
-            <div style="width: 80%; margin: 0 auto" align="center">
-            <div class="person-detail-image" style="background:url(<?php echo get_post_meta( get_the_ID(), 'project_info_logo', true ); ?>) no-repeat; background-size: 100%;">
-            </div>
-            <br/>
 
 
-                            <div class="name" style="font-weight:bolder; font-size: 1.3em"><a href="<?php echo get_post_meta( get_the_ID(), 'project_info_project_url', true )?>" target="_blank"><?php echo the_title() ?></a></div>
+
+                            <div class="name" style="font-weight:bolder; font-size: 1.3em" align="center">
+                                <a href="<?php echo get_post_meta( get_the_ID(), 'project_info_project_url', true ) ?>" target="_blank" style="font-size: 1.7em; font-weight: lighter; color: #4FBA6F"><?php echo the_title() ?>
+                                </a><br/><br/>
+
+                                <?php
+
+$str .= '<div class="institute" style="font-size: .7em; font-weight: bolder; color: #4FBA6F"><a href="' . get_post_meta( get_the_ID(), 'project_info_institution_url', true ) . '" target="_blank">' . get_post_meta( get_the_ID(), 'project_info_institution', true ) . ', ' . get_post_meta( get_the_ID(), 'project_info_country', true ) . '</a></div><br/><br/>';
+
+$str .= '<div class="tags" >';
+$tags = preg_split( "/[;,]+/", get_post_meta( get_the_ID(), 'project_info_dataset_types', true ) );
+
+foreach ( $tags as $key => $val ) {
+    $str .= '<span class="tag"><i class="fa fa-tag"></i> ' . $val . '</span>';
+}
+
+$str .= '</div>';
+
+echo $str;
+?>
+
+                                </div>
 
 <div class="clearfix"></div>
                             <div class="description">
@@ -40,6 +57,7 @@ get_header(); ?>
                             <?php echo $post->post_content ?>
 
                             </div>
+
 
                     </div>
 
