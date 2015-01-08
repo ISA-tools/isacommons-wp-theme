@@ -483,13 +483,13 @@ html {
 }
 body {
 	font-size: 14px;
-	font-size: 1rem;
-	font-family: Helvetica, Arial, sans-serif;
+	font-size: 1em;
+	font-family: "Helvetica Neue", Arial, sans-serif;
 	text-rendering: optimizeLegibility;
 	color: #444;
 }
 body.custom-font-enabled {
-	font-family: "Open Sans", Helvetica, Arial, sans-serif;
+	font-family: "Open Sans", Arial, sans-serif;
 }
 a {
 	outline: none;
@@ -527,8 +527,7 @@ a:hover {
 	background-color: #fff;
 }
 .site-content {
-	margin: 24px 0 0;
-	margin: 1.714285714rem 0 0;
+	margin: 0;
 }
 .widget-area {
 	margin: 24px 0 0;
@@ -798,10 +797,6 @@ article.sticky .featured-post {
 	margin: 0 0 24px;
 	margin: 0 0 1.714285714rem;
 	line-height: 1.714285714;
-}
-.entry-content a:visited,
-.comment-content a:visited {
-	color: #9f9f9f;
 }
 .entry-content ol,
 .comment-content ol,

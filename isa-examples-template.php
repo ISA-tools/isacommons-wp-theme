@@ -59,11 +59,11 @@ These files are shown using the <a href="https://github.com/ISA-tools/ISATab-Vie
 </div>
 
 
-<link href="/wp-content/themes/isatools-wp-theme/assets/css/ISATabViewer.css" rel="stylesheet" type="text/css"/>
+<link href="/wp-content/themes/isacommons-wp-theme/assets/css/ISATabViewer.css" rel="stylesheet" type="text/css"/>
 
-<script type="text/javascript" src="/wp-content/themes/isatools-wp-theme/assets/js/jquery-1.11.1.min.js"></script>
-<script type="text/javascript" src="/wp-content/themes/isatools-wp-theme/assets/js/handlebars-v1.3.0.js"></script>
-<script type="text/javascript" src="/wp-content/themes/isatools-wp-theme/assets/js/ISATabViewer.js"></script>
+<script type="text/javascript" src="/wp-content/themes/isacommons-wp-theme/assets/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/wp-content/themes/isacommons-wp-theme/assets/js/handlebars-v1.3.0.js"></script>
+<script type="text/javascript" src="/wp-content/themes/isacommons-wp-theme/assets/js/ISATabViewer.js"></script>
 <script type="text/javascript">
     //    BII-I-1 c3c4306af5916856c607
     ISATabViewer.rendering.render_isatab_from_gist('c3c4306af5916856c607', '#investigation_file', {});

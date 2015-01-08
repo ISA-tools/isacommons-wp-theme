@@ -23,8 +23,9 @@
  */
 
 // Set up the content width value based on the theme's design and stylesheet.
-if ( ! isset( $content_width ) )
+if ( ! isset( $content_width ) ) {
 	$content_width = 625;
+}
 
 /**
  * Twenty Twelve setup.
@@ -35,7 +36,7 @@ if ( ! isset( $content_width ) )
  * @uses load_theme_textdomain() For translation/localization support.
  * @uses add_editor_style() To add a Visual Editor stylesheet.
  * @uses add_theme_support() To add support for post thumbnails, automatic feed links,
- * 	custom background, and post formats.
+ *    custom background, and post formats.
  * @uses register_nav_menu() To add support for navigation menus.
  * @uses set_post_thumbnail_size() To set a custom post thumbnail size.
  *
@@ -75,6 +76,7 @@ function twentytwelve_setup() {
 	add_theme_support( 'post-thumbnails' );
 	set_post_thumbnail_size( 624, 9999 ); // Unlimited height, soft crop
 }
+
 add_action( 'after_setup_theme', 'twentytwelve_setup' );
 
 /**
@@ -106,19 +108,20 @@ function twentytwelve_get_font_url() {
 		 */
 		$subset = _x( 'no-subset', 'Open Sans font: add new subset (greek, cyrillic, vietnamese)', 'twentytwelve' );
 
-		if ( 'cyrillic' == $subset )
+		if ( 'cyrillic' == $subset ) {
 			$subsets .= ',cyrillic,cyrillic-ext';
-		elseif ( 'greek' == $subset )
+		} elseif ( 'greek' == $subset ) {
 			$subsets .= ',greek,greek-ext';
-		elseif ( 'vietnamese' == $subset )
+		} elseif ( 'vietnamese' == $subset ) {
 			$subsets .= ',vietnamese';
+		}
 
-		$protocol = is_ssl() ? 'https' : 'http';
+		$protocol   = is_ssl() ? 'https' : 'http';
 		$query_args = array(
 			'family' => 'Open+Sans:400italic,700italic,400,700',
 			'subset' => $subsets,
 		);
-		$font_url = add_query_arg( $query_args, "$protocol://fonts.googleapis.com/css" );
+		$font_url   = add_query_arg( $query_args, "$protocol://fonts.googleapis.com/css" );
 	}
 
 	return $font_url;
@@ -136,15 +139,17 @@ function twentytwelve_scripts_styles() {
 	 * Adds JavaScript to pages with the comment form to support
 	 * sites with threaded comments (when in use).
 	 */
-	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) )
+	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
+	}
 
 	// Adds JavaScript for handling the navigation menu hide-and-show behavior.
 	wp_enqueue_script( 'twentytwelve-navigation', get_template_directory_uri() . '/js/navigation.js', array( 'jquery' ), '20140711', true );
 
 	$font_url = twentytwelve_get_font_url();
-	if ( ! empty( $font_url ) )
+	if ( ! empty( $font_url ) ) {
 		wp_enqueue_style( 'twentytwelve-fonts', esc_url_raw( $font_url ), array(), null );
+	}
 
 	// Loads our main stylesheet.
 	wp_enqueue_style( 'twentytwelve-style', get_stylesheet_uri() );
@@ -153,6 +158,7 @@ function twentytwelve_scripts_styles() {
 	wp_enqueue_style( 'twentytwelve-ie', get_template_directory_uri() . '/css/ie.css', array( 'twentytwelve-style' ), '20121010' );
 	$wp_styles->add_data( 'twentytwelve-ie', 'conditional', 'lt IE 9' );
 }
+
 add_action( 'wp_enqueue_scripts', 'twentytwelve_scripts_styles' );
 
 /**
@@ -165,21 +171,25 @@ add_action( 'wp_enqueue_scripts', 'twentytwelve_scripts_styles' );
  * @since Twenty Twelve 1.2
  *
  * @param string $mce_css CSS path to load in TinyMCE.
+ *
  * @return string Filtered CSS path.
  */
 function twentytwelve_mce_css( $mce_css ) {
 	$font_url = twentytwelve_get_font_url();
 
-	if ( empty( $font_url ) )
+	if ( empty( $font_url ) ) {
 		return $mce_css;
+	}
 
-	if ( ! empty( $mce_css ) )
+	if ( ! empty( $mce_css ) ) {
 		$mce_css .= ',';
+	}
 
 	$mce_css .= esc_url_raw( str_replace( ',', '%2C', $font_url ) );
 
 	return $mce_css;
 }
+
 add_filter( 'mce_css', 'twentytwelve_mce_css' );
 
 /**
@@ -192,28 +202,33 @@ add_filter( 'mce_css', 'twentytwelve_mce_css' );
  *
  * @param string $title Default title text for current view.
  * @param string $sep Optional separator.
+ *
  * @return string Filtered title.
  */
 function twentytwelve_wp_title( $title, $sep ) {
 	global $paged, $page;
 
-	if ( is_feed() )
+	if ( is_feed() ) {
 		return $title;
+	}
 
 	// Add the site name.
 	$title .= get_bloginfo( 'name', 'display' );
 
 	// Add the site description for the home/front page.
 	$site_description = get_bloginfo( 'description', 'display' );
-	if ( $site_description && ( is_home() || is_front_page() ) )
+	if ( $site_description && ( is_home() || is_front_page() ) ) {
 		$title = "$title $sep $site_description";
+	}
 
 	// Add a page number if necessary.
-	if ( ( $paged >= 2 || $page >= 2 ) && ! is_404() )
+	if ( ( $paged >= 2 || $page >= 2 ) && ! is_404() ) {
 		$title = "$title $sep " . sprintf( __( 'Page %s', 'twentytwelve' ), max( $paged, $page ) );
+	}
 
 	return $title;
 }
+
 add_filter( 'wp_title', 'twentytwelve_wp_title', 10, 2 );
 
 /**
@@ -224,10 +239,13 @@ add_filter( 'wp_title', 'twentytwelve_wp_title', 10, 2 );
  * @since Twenty Twelve 1.0
  */
 function twentytwelve_page_menu_args( $args ) {
-	if ( ! isset( $args['show_home'] ) )
+	if ( ! isset( $args['show_home'] ) ) {
 		$args['show_home'] = true;
+	}
+
 	return $args;
 }
+
 add_filter( 'wp_page_menu_args', 'twentytwelve_page_menu_args' );
 
 /**
@@ -239,169 +257,182 @@ add_filter( 'wp_page_menu_args', 'twentytwelve_page_menu_args' );
  */
 function twentytwelve_widgets_init() {
 	register_sidebar( array(
-		'name' => __( 'Main Sidebar', 'twentytwelve' ),
-		'id' => 'sidebar-1',
-		'description' => __( 'Appears on posts and pages except the optional Front Page template, which has its own widgets', 'twentytwelve' ),
+		'name'          => __( 'Main Sidebar', 'twentytwelve' ),
+		'id'            => 'sidebar-1',
+		'description'   => __( 'Appears on posts and pages except the optional Front Page template, which has its own widgets', 'twentytwelve' ),
 		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
-		'after_widget' => '</aside>',
-		'before_title' => '<h3 class="widget-title">',
-		'after_title' => '</h3>',
+		'after_widget'  => '</aside>',
+		'before_title'  => '<h3 class="widget-title">',
+		'after_title'   => '</h3>',
 	) );
 
 	register_sidebar( array(
-		'name' => __( 'First Front Page Widget Area', 'twentytwelve' ),
-		'id' => 'sidebar-2',
-		'description' => __( 'Appears when using the optional Front Page template with a page set as Static Front Page', 'twentytwelve' ),
+		'name'          => __( 'First Front Page Widget Area', 'twentytwelve' ),
+		'id'            => 'sidebar-2',
+		'description'   => __( 'Appears when using the optional Front Page template with a page set as Static Front Page', 'twentytwelve' ),
 		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
-		'after_widget' => '</aside>',
-		'before_title' => '<h3 class="widget-title">',
-		'after_title' => '</h3>',
+		'after_widget'  => '</aside>',
+		'before_title'  => '<h3 class="widget-title">',
+		'after_title'   => '</h3>',
 	) );
 
 	register_sidebar( array(
-		'name' => __( 'Second Front Page Widget Area', 'twentytwelve' ),
-		'id' => 'sidebar-3',
-		'description' => __( 'Appears when using the optional Front Page template with a page set as Static Front Page', 'twentytwelve' ),
+		'name'          => __( 'Second Front Page Widget Area', 'twentytwelve' ),
+		'id'            => 'sidebar-3',
+		'description'   => __( 'Appears when using the optional Front Page template with a page set as Static Front Page', 'twentytwelve' ),
 		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
-		'after_widget' => '</aside>',
-		'before_title' => '<h3 class="widget-title">',
-		'after_title' => '</h3>',
+		'after_widget'  => '</aside>',
+		'before_title'  => '<h3 class="widget-title">',
+		'after_title'   => '</h3>',
 	) );
 }
+
 add_action( 'widgets_init', 'twentytwelve_widgets_init' );
 
 if ( ! function_exists( 'twentytwelve_content_nav' ) ) :
-/**
- * Displays navigation to next/previous pages when applicable.
- *
- * @since Twenty Twelve 1.0
- */
-function twentytwelve_content_nav( $html_id ) {
-	global $wp_query;
+	/**
+	 * Displays navigation to next/previous pages when applicable.
+	 *
+	 * @since Twenty Twelve 1.0
+	 */
+	function twentytwelve_content_nav( $html_id ) {
+		global $wp_query;
 
-	$html_id = esc_attr( $html_id );
+		$html_id = esc_attr( $html_id );
 
-	if ( $wp_query->max_num_pages > 1 ) : ?>
-		<nav id="<?php echo $html_id; ?>" class="navigation" role="navigation">
-			<h3 class="assistive-text"><?php _e( 'Post navigation', 'twentytwelve' ); ?></h3>
-			<div class="nav-previous"><?php next_posts_link( __( '<span class="meta-nav">&larr;</span> Older posts', 'twentytwelve' ) ); ?></div>
-			<div class="nav-next"><?php previous_posts_link( __( 'Newer posts <span class="meta-nav">&rarr;</span>', 'twentytwelve' ) ); ?></div>
-		</nav><!-- #<?php echo $html_id; ?> .navigation -->
-	<?php endif;
-}
+		if ( $wp_query->max_num_pages > 1 ) : ?>
+			<nav id="<?php echo $html_id; ?>" class="navigation" role="navigation">
+				<h3 class="assistive-text"><?php _e( 'Post navigation', 'twentytwelve' ); ?></h3>
+
+				<div
+					class="nav-previous"><?php next_posts_link( __( '<span class="meta-nav">&larr;</span> Older posts', 'twentytwelve' ) ); ?></div>
+				<div
+					class="nav-next"><?php previous_posts_link( __( 'Newer posts <span class="meta-nav">&rarr;</span>', 'twentytwelve' ) ); ?></div>
+			</nav><!-- #<?php echo $html_id; ?> .navigation -->
+		<?php endif;
+	}
 endif;
 
 if ( ! function_exists( 'twentytwelve_comment' ) ) :
-/**
- * Template for comments and pingbacks.
- *
- * To override this walker in a child theme without modifying the comments template
- * simply create your own twentytwelve_comment(), and that function will be used instead.
- *
- * Used as a callback by wp_list_comments() for displaying the comments.
- *
- * @since Twenty Twelve 1.0
- */
-function twentytwelve_comment( $comment, $args, $depth ) {
-	$GLOBALS['comment'] = $comment;
-	switch ( $comment->comment_type ) :
-		case 'pingback' :
-		case 'trackback' :
-		// Display trackbacks differently than normal comments.
-	?>
-	<li <?php comment_class(); ?> id="comment-<?php comment_ID(); ?>">
-		<p><?php _e( 'Pingback:', 'twentytwelve' ); ?> <?php comment_author_link(); ?> <?php edit_comment_link( __( '(Edit)', 'twentytwelve' ), '<span class="edit-link">', '</span>' ); ?></p>
-	<?php
-			break;
-		default :
-		// Proceed with normal comments.
-		global $post;
-	?>
-	<li <?php comment_class(); ?> id="li-comment-<?php comment_ID(); ?>">
-		<article id="comment-<?php comment_ID(); ?>" class="comment">
-			<header class="comment-meta comment-author vcard">
-				<?php
-					echo get_avatar( $comment, 44 );
-					printf( '<cite><b class="fn">%1$s</b> %2$s</cite>',
-						get_comment_author_link(),
-						// If current post author is also comment author, make it known visually.
-						( $comment->user_id === $post->post_author ) ? '<span>' . __( 'Post author', 'twentytwelve' ) . '</span>' : ''
-					);
-					printf( '<a href="%1$s"><time datetime="%2$s">%3$s</time></a>',
-						esc_url( get_comment_link( $comment->comment_ID ) ),
-						get_comment_time( 'c' ),
-						/* translators: 1: date, 2: time */
-						sprintf( __( '%1$s at %2$s', 'twentytwelve' ), get_comment_date(), get_comment_time() )
-					);
+	/**
+	 * Template for comments and pingbacks.
+	 *
+	 * To override this walker in a child theme without modifying the comments template
+	 * simply create your own twentytwelve_comment(), and that function will be used instead.
+	 *
+	 * Used as a callback by wp_list_comments() for displaying the comments.
+	 *
+	 * @since Twenty Twelve 1.0
+	 */
+	function twentytwelve_comment( $comment, $args, $depth ) {
+		$GLOBALS['comment'] = $comment;
+		switch ( $comment->comment_type ) :
+			case 'pingback' :
+			case 'trackback' :
+				// Display trackbacks differently than normal comments.
 				?>
-			</header><!-- .comment-meta -->
+				<li <?php comment_class(); ?> id="comment-<?php comment_ID(); ?>">
+				<p><?php _e( 'Pingback:', 'twentytwelve' ); ?> <?php comment_author_link(); ?> <?php edit_comment_link( __( '(Edit)', 'twentytwelve' ), '<span class="edit-link">', '</span>' ); ?></p>
+				<?php
+				break;
+			default :
+				// Proceed with normal comments.
+				global $post;
+				?>
+			<li <?php comment_class(); ?> id="li-comment-<?php comment_ID(); ?>">
+				<article id="comment-<?php comment_ID(); ?>" class="comment">
+					<header class="comment-meta comment-author vcard">
+						<?php
+						echo get_avatar( $comment, 44 );
+						printf( '<cite><b class="fn">%1$s</b> %2$s</cite>',
+							get_comment_author_link(),
+							// If current post author is also comment author, make it known visually.
+							( $comment->user_id === $post->post_author ) ? '<span>' . __( 'Post author', 'twentytwelve' ) . '</span>' : ''
+						);
+						printf( '<a href="%1$s"><time datetime="%2$s">%3$s</time></a>',
+							esc_url( get_comment_link( $comment->comment_ID ) ),
+							get_comment_time( 'c' ),
+							/* translators: 1: date, 2: time */
+							sprintf( __( '%1$s at %2$s', 'twentytwelve' ), get_comment_date(), get_comment_time() )
+						);
+						?>
+					</header>
+					<!-- .comment-meta -->
 
-			<?php if ( '0' == $comment->comment_approved ) : ?>
-				<p class="comment-awaiting-moderation"><?php _e( 'Your comment is awaiting moderation.', 'twentytwelve' ); ?></p>
-			<?php endif; ?>
+					<?php if ( '0' == $comment->comment_approved ) : ?>
+						<p class="comment-awaiting-moderation"><?php _e( 'Your comment is awaiting moderation.', 'twentytwelve' ); ?></p>
+					<?php endif; ?>
 
-			<section class="comment-content comment">
-				<?php comment_text(); ?>
-				<?php edit_comment_link( __( 'Edit', 'twentytwelve' ), '<p class="edit-link">', '</p>' ); ?>
-			</section><!-- .comment-content -->
+					<section class="comment-content comment">
+						<?php comment_text(); ?>
+						<?php edit_comment_link( __( 'Edit', 'twentytwelve' ), '<p class="edit-link">', '</p>' ); ?>
+					</section>
+					<!-- .comment-content -->
 
-			<div class="reply">
-				<?php comment_reply_link( array_merge( $args, array( 'reply_text' => __( 'Reply', 'twentytwelve' ), 'after' => ' <span>&darr;</span>', 'depth' => $depth, 'max_depth' => $args['max_depth'] ) ) ); ?>
-			</div><!-- .reply -->
-		</article><!-- #comment-## -->
-	<?php
-		break;
-	endswitch; // end comment_type check
-}
+					<div class="reply">
+						<?php comment_reply_link( array_merge( $args, array(
+							'reply_text' => __( 'Reply', 'twentytwelve' ),
+							'after'      => ' <span>&darr;</span>',
+							'depth'      => $depth,
+							'max_depth'  => $args['max_depth']
+						) ) ); ?>
+					</div>
+					<!-- .reply -->
+				</article>
+				<!-- #comment-## -->
+				<?php
+				break;
+		endswitch; // end comment_type check
+	}
 endif;
 
 if ( ! function_exists( 'twentytwelve_entry_meta' ) ) :
-/**
- * Set up post entry meta.
- *
- * Prints HTML with meta information for current post: categories, tags, permalink, author, and date.
- *
- * Create your own twentytwelve_entry_meta() to override in a child theme.
- *
- * @since Twenty Twelve 1.0
- */
-function twentytwelve_entry_meta() {
-	// Translators: used between list items, there is a space after the comma.
-	$categories_list = get_the_category_list( __( ', ', 'twentytwelve' ) );
+	/**
+	 * Set up post entry meta.
+	 *
+	 * Prints HTML with meta information for current post: categories, tags, permalink, author, and date.
+	 *
+	 * Create your own twentytwelve_entry_meta() to override in a child theme.
+	 *
+	 * @since Twenty Twelve 1.0
+	 */
+	function twentytwelve_entry_meta() {
+		// Translators: used between list items, there is a space after the comma.
+		$categories_list = get_the_category_list( __( ', ', 'twentytwelve' ) );
 
-	// Translators: used between list items, there is a space after the comma.
-	$tag_list = get_the_tag_list( '', __( ', ', 'twentytwelve' ) );
+		// Translators: used between list items, there is a space after the comma.
+		$tag_list = get_the_tag_list( '', __( ', ', 'twentytwelve' ) );
 
-	$date = sprintf( '<a href="%1$s" title="%2$s" rel="bookmark"><time class="entry-date" datetime="%3$s">%4$s</time></a>',
-		esc_url( get_permalink() ),
-		esc_attr( get_the_time() ),
-		esc_attr( get_the_date( 'c' ) ),
-		esc_html( get_the_date() )
-	);
+		$date = sprintf( '<a href="%1$s" title="%2$s" rel="bookmark"><time class="entry-date" datetime="%3$s">%4$s</time></a>',
+			esc_url( get_permalink() ),
+			esc_attr( get_the_time() ),
+			esc_attr( get_the_date( 'c' ) ),
+			esc_html( get_the_date() )
+		);
 
-	$author = sprintf( '<span class="author vcard"><a class="url fn n" href="%1$s" title="%2$s" rel="author">%3$s</a></span>',
-		esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ),
-		esc_attr( sprintf( __( 'View all posts by %s', 'twentytwelve' ), get_the_author() ) ),
-		get_the_author()
-	);
+		$author = sprintf( '<span class="author vcard"><a class="url fn n" href="%1$s" title="%2$s" rel="author">%3$s</a></span>',
+			esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ),
+			esc_attr( sprintf( __( 'View all posts by %s', 'twentytwelve' ), get_the_author() ) ),
+			get_the_author()
+		);
 
-	// Translators: 1 is category, 2 is tag, 3 is the date and 4 is the author's name.
-	if ( $tag_list ) {
-		$utility_text = __( 'This entry was posted in %1$s and tagged %2$s on %3$s<span class="by-author"> by %4$s</span>.', 'twentytwelve' );
-	} elseif ( $categories_list ) {
-		$utility_text = __( 'This entry was posted in %1$s on %3$s<span class="by-author"> by %4$s</span>.', 'twentytwelve' );
-	} else {
-		$utility_text = __( 'This entry was posted on %3$s<span class="by-author"> by %4$s</span>.', 'twentytwelve' );
+		// Translators: 1 is category, 2 is tag, 3 is the date and 4 is the author's name.
+		if ( $tag_list ) {
+			$utility_text = __( 'This entry was posted in %1$s and tagged %2$s on %3$s<span class="by-author"> by %4$s</span>.', 'twentytwelve' );
+		} elseif ( $categories_list ) {
+			$utility_text = __( 'This entry was posted in %1$s on %3$s<span class="by-author"> by %4$s</span>.', 'twentytwelve' );
+		} else {
+			$utility_text = __( 'This entry was posted on %3$s<span class="by-author"> by %4$s</span>.', 'twentytwelve' );
+		}
+
+		printf(
+			$utility_text,
+			$categories_list,
+			$tag_list,
+			$date,
+			$author
+		);
 	}
-
-	printf(
-		$utility_text,
-		$categories_list,
-		$tag_list,
-		$date,
-		$author
-	);
-}
 endif;
 
 /**
@@ -419,39 +450,47 @@ endif;
  * @since Twenty Twelve 1.0
  *
  * @param array $classes Existing class values.
+ *
  * @return array Filtered class values.
  */
 function twentytwelve_body_class( $classes ) {
 	$background_color = get_background_color();
 	$background_image = get_background_image();
 
-	if ( ! is_active_sidebar( 'sidebar-1' ) || is_page_template( 'page-templates/full-width.php' ) )
+	if ( ! is_active_sidebar( 'sidebar-1' ) || is_page_template( 'page-templates/full-width.php' ) ) {
 		$classes[] = 'full-width';
+	}
 
 	if ( is_page_template( 'page-templates/front-page.php' ) ) {
 		$classes[] = 'template-front-page';
-		if ( has_post_thumbnail() )
+		if ( has_post_thumbnail() ) {
 			$classes[] = 'has-post-thumbnail';
-		if ( is_active_sidebar( 'sidebar-2' ) && is_active_sidebar( 'sidebar-3' ) )
+		}
+		if ( is_active_sidebar( 'sidebar-2' ) && is_active_sidebar( 'sidebar-3' ) ) {
 			$classes[] = 'two-sidebars';
+		}
 	}
 
 	if ( empty( $background_image ) ) {
-		if ( empty( $background_color ) )
+		if ( empty( $background_color ) ) {
 			$classes[] = 'custom-background-empty';
-		elseif ( in_array( $background_color, array( 'fff', 'ffffff' ) ) )
+		} elseif ( in_array( $background_color, array( 'fff', 'ffffff' ) ) ) {
 			$classes[] = 'custom-background-white';
+		}
 	}
 
 	// Enable custom font class only if the font CSS is queued to load.
-	if ( wp_style_is( 'twentytwelve-fonts', 'queue' ) )
+	if ( wp_style_is( 'twentytwelve-fonts', 'queue' ) ) {
 		$classes[] = 'custom-font-enabled';
+	}
 
-	if ( ! is_multi_author() )
+	if ( ! is_multi_author() ) {
 		$classes[] = 'single-author';
+	}
 
 	return $classes;
 }
+
 add_filter( 'body_class', 'twentytwelve_body_class' );
 
 /**
@@ -468,6 +507,7 @@ function twentytwelve_content_width() {
 		$content_width = 960;
 	}
 }
+
 add_action( 'template_redirect', 'twentytwelve_content_width' );
 
 /**
@@ -484,6 +524,7 @@ function twentytwelve_customize_register( $wp_customize ) {
 	$wp_customize->get_setting( 'blogdescription' )->transport  = 'postMessage';
 	$wp_customize->get_setting( 'header_textcolor' )->transport = 'postMessage';
 }
+
 add_action( 'customize_register', 'twentytwelve_customize_register' );
 
 /**
@@ -496,177 +537,174 @@ add_action( 'customize_register', 'twentytwelve_customize_register' );
 function twentytwelve_customize_preview_js() {
 	wp_enqueue_script( 'twentytwelve-customizer', get_template_directory_uri() . '/js/theme-customizer.js', array( 'customize-preview' ), '20130301', true );
 }
+
 add_action( 'customize_preview_init', 'twentytwelve_customize_preview_js' );
 
 require 'jw_custom_posts.php';
 
-$person = new JW_Post_Type('Person', array(
-   'supports' => array('title', 'revisions'),
-   'labels' => array(
-               'name'      => 'Person',
-               'all_items' => 'People',
-           ),
-   'can_export' => true,
-));
-$person->add_taxonomy('Interests');
-$person->add_meta_box('Person Info', array(
-	'position' => 'text',
-	'institution' => 'text',
-	'biography' => 'textarea',
-	'Profile Image' => 'file',
-	'email' => 'text',
-	'website' => 'text',
-	'linkedin' => 'text',
-	'twitter' => 'text',
-	'github' => 'text',
-	'orcid' => 'text',
-	'google plus' => 'text'
-));
+$project = new JW_Post_Type( 'Projects', array(
+	'labels'     => array(
+		'name'      => 'Project',
+		'all_items' => 'Projects',
+	),
+	'can_export' => true,
+) );
 
-$tools = new JW_Post_Type('Tools', array(
-   'supports' => array('title', 'revisions'),
-   'labels' => array(
-               'name'      => 'Tool',
-               'all_items' => 'Tools',
-           ),
-    'can_export' => true,
-));
+$project->add_meta_box( 'Project Info', array(
+	'institution'     => 'text',
+	'institution_url' => 'text',
+	'project_url'     => 'text',
+	'country'         => 'text',
+	'dataset_types'   => 'text',
+	'logo'            => 'file',
+	'project_type'    => array(
+		'select',
+		array( 'Internal', 'Conversion', 'Extension', 'Public' )
+	)
+) );
 
-$tools->add_meta_box('Tool Info', array(
-	'description' => 'textarea',
-	'version' => 'text',
-	'apple_download' => 'text',
-	'windows_download' => 'text',
-	'linux_download' => 'text',
-	'tool type' => array('select', array('Analysis','Annotation', 'Configuration', 'Conversion', 'Ontology', 'Parsers', 'Validation', 'Web')),
-	'source' => 'text',
-	'docs' => 'text',
-	'issues' => 'text',
-	'videos' => 'text',
-	'logo' => 'file',
-	'screenshot' => 'file'
-));
+function change_default_title( $title ) {
 
-function change_default_title( $title ){
+	$screen = get_current_screen();
 
-    $screen = get_current_screen();
+	if ( 'person' == $screen->post_type ) {
+		$title = 'Enter title and name of person';
+	}
 
-    if ( 'person' == $screen->post_type){
-        $title = 'Enter title and name of person';
-    }
+	if ( 'projects' == $screen->post_type ) {
+		$title = 'Enter project name';
+	}
 
-    if('project' == $screen->post_type) {
-        $title = 'Enter project title';
-    }
-
-    return $title;
+	return $title;
 }
 
 add_filter( 'enter_title_here', 'change_default_title' );
 
-function people_function($atts) {
+function people_function( $atts ) {
 
-	$the_query = new WP_Query(array('post_type' => 'Person', 'posts_per_page' => -1, 'orderby' => 'id', 'order' =>'ASC'));
-	$str = "";
+	$the_query = new WP_Query( array(
+		'post_type'      => 'Person',
+		'posts_per_page' => - 1,
+		'orderby'        => 'id',
+		'order'          => 'ASC'
+	) );
+	$str       = "";
 	if ( $the_query->have_posts() ) {
-		$str ='<div id="people">';
-    	while ( $the_query->have_posts() ) {
-    		$the_query->the_post();
+		$str = '<div id="people">';
+		while ( $the_query->have_posts() ) {
+			$the_query->the_post();
 
-    		$str .='<div id="'.get_the_ID().'" class="isatools-person">';
+			$str .= '<div id="' . get_the_ID() . '" class="isatools-person">';
 
-    			$str .='<div class="person-image" style="background: url('.get_post_meta( get_the_ID(),'person_info_profile_image', true ).') no-repeat; background-size:100%" >';
-    			$str .='<div class="meta">';
+			$str .= '<div class="person-image" style="background: url(' . get_post_meta( get_the_ID(), 'person_info_profile_image', true ) . ') no-repeat; background-size:100%" >';
+			$str .= '<div class="meta">';
 
-				$str .='<div class="name"><a href="'.get_the_permalink().'">'.get_the_title().'</a></div>';
-				$str .='<div class="position">'.get_post_meta( get_the_ID(), 'person_info_position', true ).'</div>';
+			$str .= '<div class="name"><a href="' . get_the_permalink() . '">' . get_the_title() . '</a></div>';
+			$str .= '<div class="position">' . get_post_meta( get_the_ID(), 'person_info_position', true ) . '</div>';
 
-				$str .='<div class="links">';
+			$str .= '<div class="links">';
 
-					if (get_post_meta( get_the_ID(),'person_info_website', true ) != "") {
-						$str .=' <a target="_blank" href="'.get_post_meta( get_the_ID(), 'person_info_website', true ).'"><i class="fa fa-home" style="font-size:1.5em"></i></a>';
-					}
+			if ( get_post_meta( get_the_ID(), 'person_info_website', true ) != "" ) {
+				$str .= ' <a target="_blank" href="' . get_post_meta( get_the_ID(), 'person_info_website', true ) . '"><i class="fa fa-home" style="font-size:1.5em"></i></a>';
+			}
 
-					if (get_post_meta( get_the_ID(), 'person_info_github', true ) != "") {
-						$str .=' <a target="_blank" href="'.get_post_meta( get_the_ID(), 'person_info_github', true ).'"><i class="fa fa-github-alt" style="font-size:1.5em"></i></a>';
-					}
+			if ( get_post_meta( get_the_ID(), 'person_info_github', true ) != "" ) {
+				$str .= ' <a target="_blank" href="' . get_post_meta( get_the_ID(), 'person_info_github', true ) . '"><i class="fa fa-github-alt" style="font-size:1.5em"></i></a>';
+			}
 
-					if (get_post_meta( get_the_ID(), 'person_info_linkedin', true ) != "") {
-                    	$str .=' <a target="_blank" href="'.get_post_meta( get_the_ID(), 'person_info_linkedin', true ).'"><i class="fa fa-linkedin-square" style="font-size:1.5em"></i></a>';
-                    }
+			if ( get_post_meta( get_the_ID(), 'person_info_linkedin', true ) != "" ) {
+				$str .= ' <a target="_blank" href="' . get_post_meta( get_the_ID(), 'person_info_linkedin', true ) . '"><i class="fa fa-linkedin-square" style="font-size:1.5em"></i></a>';
+			}
 
-                    if (get_post_meta( get_the_ID(), 'person_info_google_plus', true ) != "") {
-                    	$str .=' <a target="_blank" href="'.get_post_meta( get_the_ID(), 'person_info_google_plus', true ).'"><i class="fa fa-google-plus-square" style="font-size:1.5em"></i></a>';
-                    }
-					$str .='</div>';
-    			$str .='</div></div>';
+			if ( get_post_meta( get_the_ID(), 'person_info_google_plus', true ) != "" ) {
+				$str .= ' <a target="_blank" href="' . get_post_meta( get_the_ID(), 'person_info_google_plus', true ) . '"><i class="fa fa-google-plus-square" style="font-size:1.5em"></i></a>';
+			}
+			$str .= '</div>';
+			$str .= '</div></div>';
 
-    		$str .='</div>';
-    	}
-    	$str .='</div>';
-    }
-    return $str;
+			$str .= '</div>';
+		}
+		$str .= '</div>';
+	}
+
+	return $str;
 }
 
 function output_filter() {
-	$tool_types = array('Analysis', 'Annotation', 'Configuration', 'Conversion', 'Ontology', 'Parsers', 'Validation', 'Web');
+	$tool_types = array(
+		'Internal',
+		'Public',
+		'Conversion',
+		'Extension'
+	);
 	$filter_str = '<ul id="filter-items" class="splitter"><li><ul>';
-	$filter_str .= '<li class="selected"><span data-value="all">All</span></li>';
-	foreach ($tool_types as $key => $val) {
-		$filter_str .= '<li class=""><span data-value="'.$val.'">'.$val.'</span></li>';
+	$filter_str .= '<li class="selected"><span data-value="all"><img src="/wp-content/themes/isacommons-wp-theme/assets/img/all.svg" width="70px"/></span></li>';
+	foreach ( $tool_types as $key => $val ) {
+		$image = '/wp-content/themes/isacommons-wp-theme/assets/img/' . strtolower( $val ) . '.svg';
+		$filter_str .= '<li class=""><span data-value="' . $val . '"><img src="'. $image.'" width="70px"/></span></li>';
 	}
 	$filter_str .= '</ul></li></ul>';
 
 	return $filter_str;
 }
 
-function tools_function($attrs) {
-	$the_query = new WP_Query(array('post_type' => 'Tools', 'posts_per_page' => -1, 'orderby' => 'id', 'order' =>'ASC'));
-    $str = "";
-	$supported_os = array('windows', 'apple', 'linux');
-	$support_link = array('docs' => 'fa-book', 'videos' => 'fa-video-camera', 'source' => 'fa-github', 'issues' => 'fa-warning');
+function projects_function( $attrs ) {
+	$the_query = new WP_Query( array(
+		'post_type'      => 'Projects',
+		'posts_per_page' => - 1,
+		'orderby'        => 'title',
+		'order'          => 'ASC'
+	) );
+	$str       = "";
 
-    if ( $the_query->have_posts() ) {
-    	$str .= output_filter();
-    	$str .= '<div class="cf"></div>';
-    	$str .='<ul id="tool-list" class="service-list">';
-        while ( $the_query->have_posts() ) {
-        	$the_query->the_post();
+	if ( $the_query->have_posts() ) {
+		$str .= output_filter();
+		$str .= '<div class="cf" id="projects"></div>';
+		$str .= '<ul id="tool-list" class="service-grid">';
+		while ( $the_query->have_posts() ) {
+			$the_query->the_post();
 
-        	$str .='<li id="'.get_the_ID().'" class="tool_block '.get_post_meta( get_the_ID(), 'tool_info_tool_type', true ).'" style="margin-left:0px; margin-right: 4px; margin-bottom: 10px">';
-        	$str .= '<div align="center" id="'.get_the_title().'" class="services">';
-        	$str .= '<img src="'.get_post_meta( get_the_ID(),'tool_info_logo', true ).'" alt="'.get_the_title().'" style="float:none"><div class="cf"></div>';
-        	$str .= '<div class="descriptionBlock">'.get_post_meta( get_the_ID(),'tool_info_description', true ).'</div>';
-        	$str .= '<div><i class="fa fa-tag"></i> Version '.get_post_meta( get_the_ID(),'tool_info_version', true ).'</div><div class="cf"></div>';
+			$str .= '<li id="' . get_the_ID() . '" class="tool_block ' . get_post_meta( get_the_ID(), 'project_info_project_type', true ) . '" style="margin-left:0px; margin-right: 10px; margin-bottom: 10px">';
+			$str .= '<div id="' . get_the_title() . '">';
+			$str .= '<div class="project-image-container">';
+			$type = get_post_meta( get_the_ID(), 'project_info_project_type', true);
+			$image = '/wp-content/themes/isacommons-wp-theme/assets/img/' . strtolower( $type ) . '-sml.svg';
+			$str .= '<div class="resource-type" align="center"><img src="' . $image . '" width="70px"/></div>';
 
-        	$str .= '<div class="download">';
-        	foreach ($supported_os as $key => $val) {
-				$meta_key = 'tool_info_'.$val.'_download';
-				$meta_value = get_post_meta( get_the_ID(),$meta_key, true );
-                if($meta_value != '') {
-                	$str .= '<a href="'.$meta_value.'" class="download-button" target="_blank"><span class="fa fa-'.$val.'"></span></a>';
-                }
-            }
-            $str .= '</div>';
+			$str .= '</div>';
+			$str .= '<div class="project-detail-container">';
+			$str .= '<span><a href="' . get_the_permalink() . '" target="_blank">' . get_the_title() . '</a></span>';
 			$str .= '<div class="clearfix"></div>';
-            $str .= '<div class="support_links">';
-            foreach ($support_link as $key => $val) {
-            	$meta_key = 'tool_info_'.$key;
-            	$meta_value = get_post_meta( get_the_ID(), $meta_key, true );
-            	if($meta_value != '') {
-                	$str .= '<a href="'.$meta_value.'" class="download-button button-small" target="_blank"><span class="fa '.$val.'"></span> '. $key.'</a>';
-                }
-            }
 
-			$str .= '</div></li>';
 
-        }
-    } else {
-    	$str .= '<h4>No tools available</h4>';
-    }
 
-    return $str;
+			$str .= '<div class="clearfix"></div>';
+			$str .= '<div class="institute"><a href="' . get_post_meta( get_the_ID(), 'project_info_institution_url', true ) . '" target="_blank"><img src="' . get_post_meta( get_the_ID(), 'project_info_logo', true ) . '" alt="' . get_the_title() . '" class="tool-logo"/> ' . get_post_meta( get_the_ID(), 'project_info_institution', true ) . ', ' . get_post_meta( get_the_ID(), 'project_info_country', true ) . '</a></div>';
+
+			$str .= '<div class="tags" >';
+			$tags = preg_split( "/[;,]+/", get_post_meta( get_the_ID(), 'project_info_dataset_types', true ) );
+
+			foreach ( $tags as $key => $val ) {
+				$str .= '<span class="tag"><i class="fa fa-tag"></i> ' . $val . '</span>';
+			}
+
+			$str .= '</div>';
+
+
+			$str .= '</div>';
+			$str .= '<div class="project-link-container">';
+			$str .= '<a href="'.get_the_permalink().'" class="case-study-link"><span class="fa fa-chevron-right pull-right" style="margin-top: 20px; font-size: 2.5em"></span></a>';
+			$str .= '</div>';
+			$str .= '</li>';
+			$str .= '<div class="clearfix"></div>';
+
+		}
+	} else {
+		$str .= '<h4>No commons projects available</h4>';
+	}
+
+	return $str;
 }
 
-add_shortcode('people', 'people_function');
-add_shortcode('tools', 'tools_function');
+add_shortcode( 'people', 'people_function' );
+add_shortcode( 'projects', 'projects_function' );

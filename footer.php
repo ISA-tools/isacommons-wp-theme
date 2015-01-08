@@ -16,18 +16,19 @@
 
 <div id="footer" class="centralPanel">
 
+
+
     <div id="footer_nav_wrapper">
 
-        <div class="col col_wide">
-             
-<img src="/wp-content/themes/isatools-wp-theme/img/footer_logo.svg" alt="Logo" style="width: 40%"/>
+        <div class="col col_wide" align="center">
+
+<img src="/wp-content/themes/isacommons-wp-theme/assets/img/isacommons-footer.svg" alt="Logo" style="width: 50%"/>
         </div>
 
         <div class="col col_med">
             <h3>Related Links</h3>
             <ul>
-                <li><a href="http://www.oerc.ox.ac.uk" target="_blank">Oxford e-Research Centre</a></li>
-                <li><a href="http://www.ox.ac.uk" target="_blank">University of Oxford</a></li>
+                <li><a href="http://www.isa-tools.org" target="_blank">ISA tools</a></li>
                 <li><a href="http://www.biosharing.org" target="_blank">BioSharing</a></li>
             </ul>
         </div>
@@ -58,4 +59,11 @@
 <?php wp_footer(); ?>
 
 </body>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="/wp-content/themes/isacommons-wp-theme/assets/js/jquery.twitter.min.js"></script>
+
+<script type="text/javascript">
+    twitterFetcher.fetch('361827374599389184', 'twitter', 1, true, false, false);
+</script>
 </html>
