@@ -20,7 +20,7 @@ a {
     text-align: left;
     background: #fff;
 
-    margin:0 auto;
+    margin: 0 auto;
     padding: 6px 5px 5px;
     font-size: .9em;
     font-weight: lighter;
@@ -52,7 +52,6 @@ a {
     background-color: #f6f7f6;
 }
 
-
 .splitter ul li span {
 
     color: #666;
@@ -68,9 +67,8 @@ a {
 .service-grid {
     width: 100%;
     list-style: none;
-    overflow:hidden;
+    overflow: hidden;
 }
-
 
 .service-grid li {
     float: left;
@@ -496,13 +494,13 @@ Project page css
 }
 
 .project-detail-container {
-    display:inline-block;
+    display: inline-block;
     width: 84%;
 }
 
 .project-link-container {
     width: 5%;
-    display:inline-block;
+    display: inline-block;
     align-content: right;
     vertical-align: top;
 }
@@ -2094,14 +2092,15 @@ div.css-search div.em-search-main .em-search-submit:hover {
 
 .site-header {
     height: 290px;
-    background: #2980BA url('../img/map-bg.svg') 50% 2% no-repeat;
+    /*background: #2980BA url('../img/map-bg.svg') 50% 2% no-repeat;*/
+    background: #2980BA;
     background-size: 100%;
     border-bottom: 7px solid #3B97D3;
 }
 
 .site-header .head-link {
     color: white;
-    margin-top:20px;
+    margin-top: 20px;
     font-size: 1.2em;
     margin-left: 10px;
     background-color: #2980BA;
@@ -2170,7 +2169,6 @@ div.css-search div.em-search-main .em-search-submit:hover {
 
     color: #2980BA;
 }
-
 
 /* Custom, iPhone Retina */
 @media only screen and (max-width: 320px) {
@@ -2535,8 +2533,6 @@ div.css-search div.em-search-main .em-search-submit:hover {
 .wp_rss_retriever p {
     margin: 0;
 }
-
-
 
 #projects .entry-content ul, .comment-content ul, .mu_register ul {
     list-style: none
