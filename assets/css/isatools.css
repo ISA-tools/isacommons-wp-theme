@@ -2094,7 +2094,7 @@ div.css-search div.em-search-main .em-search-submit:hover {
 }
 
 .site-header {
-    height: 400px;
+    height: 250px;
     background: #2980BA url('../img/map-bg.svg') 50% 2% no-repeat;
     background-size: 100%;
     border-bottom: 7px solid #3B97D3;
@@ -2146,7 +2146,7 @@ div.css-search div.em-search-main .em-search-submit:hover {
     width: 150px;
     padding-left: 60px;
     margin: 0 auto;
-    margin-top: 20px;
+    margin-top: 60px;
     cursor: pointer;
 }
 
